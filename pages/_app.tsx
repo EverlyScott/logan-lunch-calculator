@@ -45,6 +45,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-config" content="/favs/browserconfig.xml" />
         <meta name="theme-color" content="#121212" />
+        <title>Logan Lunch Calculator</title>
       </Head>
         <ThemeProvider theme={theme}>
           <GeistProvider>
