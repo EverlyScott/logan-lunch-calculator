@@ -29,18 +29,18 @@ const Home: React.FC = () => {
 
   const lunchTimesNormal:Array<string|undefined> = [
     undefined,
-    "11:40",
-    "12:00",
-    "12:25"
+    "11:40-12:10",
+    "12:00-12:30",
+    "12:25-12:55"
   ];
 
   const lunchTimesBlock:Array<string|undefined> = [
     undefined,
-    "11:20",
-    "12:00",
-    "12:40"
+    "11:20-11:50",
+    "12:00-12:30",
+    "12:40-1:10"
   ];
-  
+
   let lunch: 0|1|2|3 = 0;
   let lunchTime:string = "";
   let lunchText:string = "";
@@ -58,13 +58,23 @@ const Home: React.FC = () => {
     }
   }
 
+  if (classDay === "wed" || classDay === "thurs") {
+    lunchTime = lunchTimesBlock[lunch] as string;
+  } else {
+    lunchTime = lunchTimesNormal[lunch] as string;
+  }
+
   return (
     <Layout>
       <div className={styles.main}>
-        {lunch === 0 ? "" : (
+        {lunch === 0 ? (
+          <React.Fragment>
+            <h1>Please fill in the following fields.</h1>
+          </React.Fragment>
+        ) : (
           <React.Fragment>
             <h1>You have {lunchText} lunch!</h1>
-            <h4>(which is at {"12:00"})</h4>
+            <h4>(which is from {lunchTime})</h4>
           </React.Fragment>
         )}
         <br />
@@ -81,7 +91,7 @@ const Home: React.FC = () => {
             </Select>
           </FormControl>
           <br />
-          <p>Answer the following questions based on your {"5th"} period class.</p>
+          <p>Answer the following questions based on your {classDay === "thurs" ? "6th" : "5th"} period class.</p>
           <TextField label="Room Number" type="number" variant="filled" value={roomNumber} onChange={onRoomNumberChange} InputProps={{ inputProps: { min: 100, max: 299 } }} fullWidth />
           <FormControlLabel control={
             <Checkbox value={isStudyHall} onChange={onIsStudyHallChange} />
